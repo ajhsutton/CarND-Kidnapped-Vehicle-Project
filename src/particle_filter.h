@@ -28,9 +28,8 @@ struct Particle {
 class ParticleFilter {
 	
 	// Number of particles to draw
-	int num_particles; 
-	
-	
+	int num_particles;
+
 	
 	// Flag, if filter is initialized
 	bool is_initialized;
@@ -42,7 +41,7 @@ public:
 	
 	// Set of current particles
 	std::vector<Particle> particles;
-
+  
 	// Constructor
 	// @param num_particles Number of particles
 	ParticleFilter() : num_particles(0), is_initialized(false) {}
@@ -60,7 +59,7 @@ public:
 	 *   standard deviation of yaw [rad]]
 	 */
 	void init(double x, double y, double theta, double std[]);
-
+  
 	/**
 	 * prediction Predicts the state for the next time step
 	 *   using the process model.
@@ -101,7 +100,7 @@ public:
 	 * Set a particles list of associations, along with the associations calculated world x,y coordinates
 	 * This can be a very useful debugging tool to make sure transformations are correct and assocations correctly connected
 	 */
-	Particle SetAssociations(Particle& particle, const std::vector<int>& associations,
+	void SetAssociations(Particle& particle, const std::vector<int>& associations,
 		                     const std::vector<double>& sense_x, const std::vector<double>& sense_y);
 
 	
