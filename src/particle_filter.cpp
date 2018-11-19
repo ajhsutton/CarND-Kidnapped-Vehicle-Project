@@ -64,9 +64,13 @@ void ParticleFilter::prediction(double delta_t, double std_pos[], double velocit
     double x0 = p_it->x;
     double y0 = p_it->y;
     double theta0 = p_it->theta;
-    
-    x1 = x0 + (velocity/yaw_rate)*(sin(theta0 + yaw_rate*delta_t) - sin(theta0));
-    y1 = y0 + (velocity/yaw_rate)*(cos(theta0) - cos(theta0 + yaw_rate*delta_t));
+    if (yaw_rate == 0){
+      x1 = x0 + delta_t*velocity*cos(theta0);
+      y1 = y0 + delta_t*velocity*sin(theta0);
+    } else {
+      x1 = x0 + (velocity/yaw_rate)*(sin(theta0 + yaw_rate*delta_t) - sin(theta0));
+      y1 = y0 + (velocity/yaw_rate)*(cos(theta0) - cos(theta0 + yaw_rate*delta_t));
+    }
     theta1 = theta0 + yaw_rate*delta_t;
     
     p_it->x = x1 + distribution_x(gen);
